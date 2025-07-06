@@ -16,7 +16,7 @@ export const authSlice = createSlice({
     loginSuccess: (state, { payload }) => {
       return {
         ...state,
-        userData: payload,
+        userData: { ...payload },
         isLoading: false,
       };
     },
@@ -28,8 +28,16 @@ export const authSlice = createSlice({
         isLoading: false,
       };
     },
+    logoff: (state) => {
+      return {
+        ...state,
+        userData: {},
+        isLoading: false,
+        error: null,
+      };
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginError } = authSlice.actions;
+export const { loginStart, loginSuccess, loginError, logoff } = authSlice.actions;
 export default authSlice.reducer;

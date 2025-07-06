@@ -5,8 +5,6 @@ axios.interceptors.request.use(
   (config) => {
     const { userData } = store.getState().userData;
     config.baseURL = 'https://reqres.in/api';
-    console.log(userData);
-    console.log(userData?.token);
 
     if (userData?.token && config.headers) {
       config.headers.Authorization = `Bearer ${userData?.token}`;
