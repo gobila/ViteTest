@@ -1,7 +1,9 @@
+import React from 'react';
 import { Avatar, Flex, Space, Table } from 'antd';
 import { useState } from 'react';
 import { usersApi } from '../../services/users';
 import { useQuery } from '@tanstack/react-query';
+import Title from 'antd/es/typography/Title';
 
 const List = () => {
   const columns = [
@@ -62,7 +64,8 @@ const List = () => {
   };
 
   return (
-    <>
+    <Flex style={{ padding: '24px', maxWidth: '1390px', margin: 'auto' }} width="100%" vertical>
+      <Title level={3}>Usuários</Title>
       {isLoading && <p>Carregando...</p>}
       {!isLoading && (
         <Table
@@ -70,9 +73,10 @@ const List = () => {
           dataSource={Array.isArray(data?.data) ? data.data : []}
           pagination={pagination}
           onChange={handleChangePage}
+          // style={{  }}
         />
       )}
-    </>
+    </Flex>
   );
 };
 

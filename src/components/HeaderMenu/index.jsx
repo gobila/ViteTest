@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoff } from '../../store/auth/authSlice';
 import { StyledMenu, StyledMenuItem } from './styles';
@@ -11,7 +12,7 @@ const HeaderMenu = () => {
     dispatch(logoff());
   };
   return (
-    <StyledMenu mode="inline">
+    <StyledMenu mode="inline" data-testid="header_menu">
       <SubMenu key="sub1" title={userData.user} style={{ border: 'none' }}>
         <StyledMenuItem
           key="1"

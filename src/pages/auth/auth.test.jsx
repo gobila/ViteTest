@@ -36,8 +36,8 @@ describe('Auth Component', () => {
       </TestWrapper>,
     );
 
-    const emailInput = screen.getByTestId('emailInput');
-    const passwordInput = screen.getByTestId('passwordInput');
+    const emailInput = screen.getByTestId('emailInput').querySelector('input');
+    const passwordInput = screen.getByTestId('passwordInput').querySelector('input');
     const submitButton = screen.getByTestId('submitButton');
 
     // Fill in the form fields
@@ -47,10 +47,14 @@ describe('Auth Component', () => {
 
     // Check if axios.post was called with the correct data
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith(expect.any(String), {
-        email: 'eve.holt@reqres.in',
-        password: 'cityslicka',
-      });
+      expect(axios.post).toHaveBeenCalledWith(
+        expect.any(String), // ignora o endpoint exato
+        {
+          username: 'eve.holt@reqres.in',
+          password: 'cityslicka',
+        },
+        expect.any(Object),
+      );
     });
   });
 
@@ -66,8 +70,8 @@ describe('Auth Component', () => {
       </TestWrapper>,
     );
 
-    const emailInput = screen.getByTestId('emailInput');
-    const passwordInput = screen.getByTestId('passwordInput');
+    const emailInput = screen.getByTestId('emailInput').querySelector('input');
+    const passwordInput = screen.getByTestId('passwordInput').querySelector('input');
     const submitButton = screen.getByTestId('submitButton');
 
     // Fill in the form with invalid data (no password)
