@@ -11,20 +11,10 @@ vi.mock('@tanstack/react-query', () => ({
 }));
 
 import { useQuery } from '@tanstack/react-query';
+import * as Mock from './mock.json';
 
 describe('List component', () => {
-  const mockData = {
-    data: [
-      {
-        id: 1,
-        first_name: 'Fulano',
-        last_name: 'Silva',
-        avatar: 'avatar-url',
-        email: 'fulano@email.com',
-      },
-    ],
-    total: 1,
-  };
+  const mockData = Mock;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -47,8 +37,8 @@ describe('List component', () => {
     });
 
     render(<List />);
-    expect(screen.getByText(/fulano silva/i)).toBeInTheDocument();
-    expect(screen.getByText(/fulano@email.com/i)).toBeInTheDocument();
-    expect(screen.getByText(/mais detalhes/i)).toBeInTheDocument();
+    expect(screen.getByText(/George Bluth/i)).toBeInTheDocument();
+    expect(screen.getByText(/george.bluth@reqres.in/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/mais detalhes/i)).toHaveLength(10);
   });
 });

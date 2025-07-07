@@ -15,6 +15,7 @@ export default defineConfig({
         'src/services/axios.js',
         'src/utils/prepare.js',
       ],
+      reporter: ['text', 'json', 'html'],
       reportsDirectory: './__tests__/coverage',
     },
   },

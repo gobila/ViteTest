@@ -1,9 +1,9 @@
 import React from 'react';
 import { Avatar, Flex, Space, Table } from 'antd';
-import { useState } from 'react';
-import { usersApi } from '../../services/users';
-import { useQuery } from '@tanstack/react-query';
 import Title from 'antd/es/typography/Title';
+import useList from '../../hooks/useList';
+import SearchList from '../Search';
+// import Search from '../Search';
 
 const List = () => {
   const columns = [
@@ -41,19 +41,7 @@ const List = () => {
       ),
     },
   ];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
-  const { data, isLoading } = useQuery({
-    queryKey: ['users', currentPage, perPage],
-    queryFn: () => usersApi(currentPage, perPage),
-    keepPreviousData: true,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  const handleChangePage = (page) => {
-    setCurrentPage(page.current);
-    setPerPage(page.pageSize);
-  };
+  const { data, isLoading, handleChangePage, currentPage, perPage } = useList();
 
   const pagination = {
     current: currentPage,
@@ -66,6 +54,7 @@ const List = () => {
   return (
     <Flex style={{ padding: '24px', maxWidth: '1390px', margin: 'auto' }} width="100%" vertical>
       <Title level={3}>Usuários</Title>
+      <SearchList />
       {isLoading && <p>Carregando...</p>}
       {!isLoading && (
         <Table
@@ -73,7 +62,6 @@ const List = () => {
           dataSource={Array.isArray(data?.data) ? data.data : []}
           pagination={pagination}
           onChange={handleChangePage}
-          // style={{  }}
         />
       )}
     </Flex>

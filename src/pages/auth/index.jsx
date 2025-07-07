@@ -1,10 +1,9 @@
-import { Button, Flex, Form, Input, Image, Alert } from 'antd';
+import { Flex } from 'antd';
 import React, { useEffect } from 'react';
-
 import { loginError, loginSuccess } from '../../store/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { StyledImage } from './styles';
 import { authApi } from '../../services/auth';
 import LoginForm from '../../components/LoginForm';
@@ -43,7 +42,8 @@ export const Auth = () => {
       dispatch(loginSuccess({ token: callApi?.token, user: username }));
       navigate('/');
     } catch (error) {
-      dispatch(loginError({ error: error?.message || loginLabels.errorGeneric }));
+      const errorMessage = error.response.data?.error;
+      dispatch(loginError(errorMessage));
       setError('username', { type: 'manual', message: '' });
       setError('password', { type: 'manual', message: '' });
     }

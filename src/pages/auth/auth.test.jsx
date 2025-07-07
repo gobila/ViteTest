@@ -76,7 +76,7 @@ describe('Auth Component', () => {
 
     // Fill in the form with invalid data (no password)
     fireEvent.change(emailInput, { target: { value: 'peter@klaven' } });
-    fireEvent.change(passwordInput, { target: { value: '' } });
+    fireEvent.change(passwordInput, { target: { value: '123' } });
     fireEvent.click(submitButton);
 
     // Wait for the API call and check if the error was logged to the console
